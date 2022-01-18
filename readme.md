@@ -136,6 +136,10 @@ export default {
 ## todo
 - 替换 `u-i` 为专用节点
 - 其他小程序中的验证
+  - [x] 微信
+  - [x] 手q
+  - [ ] 快手
+  - [ ] other... 
 - sourcemap https://rollupjs.org/guide/en/#source-code-transformations
 - hbuilder 支持
 

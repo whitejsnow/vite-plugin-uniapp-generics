@@ -1,7 +1,7 @@
 /**
  * @Author:
  * @Date: 2022-01-10 11:46:30
- * @FilePath: /vite-plugin-uniapp-generics/src/utils/index.ts
+ * @FilePath: /github-vite-plugin-uniapp-generics/src/utils/index.ts
  * @Description:
  */
 import { v4 as uuidv4 } from 'uuid';
@@ -14,6 +14,7 @@ import {
     COMP_PRE_COMB_FATHERCOMP,
     COMP_ID_FATHER_GENERICCOMP,
     MID_PROPS_REG_STR,
+    TEMPLATE_EXTNAME
 } from '../constant';
 
 export function getCombineGenericKey(key: string): string {
@@ -38,10 +39,18 @@ export function getCombineChildTempComp(componentChildName: string): string {
     return `<${componentChildName} ${SPEC_COMP_ID_KEY}="${COMP_ID_COMB_TEMP_SON}" />`;
 }
 
+export function getTemplateExtnameReg(platform: string): RegExp {
+    const reg = new RegExp(
+        `(${TEMPLATE_EXTNAME[platform]})$`,
+        "i"
+    );
+    return reg;
+}
+
 export function getCombineChildReg(): RegExp {
     const reg = new RegExp(
         `<[A-Za-z0-9\\s:\\-_=]+"${COMP_ID_COMB_TEMP_SON}"${MID_PROPS_REG_STR}*/>`
-    );
+    , 'g');
     return reg;
 }
 export function getFatherGenericComReg(str: string, opts: string) : RegExp {

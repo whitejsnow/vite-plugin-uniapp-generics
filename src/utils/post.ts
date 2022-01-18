@@ -1,14 +1,14 @@
 /**
  * @Author: maxizhang
  * @Date: 2022-01-17 16:16:30
- * @FilePath: /vite-plugin-uniapp-generics/src/utils/post.ts
+ * @FilePath: /github-vite-plugin-uniapp-generics/src/utils/post.ts
  * @Description: 
  */
 
 import {WxComponentFileJson} from './../types'
 import {
     GENERIC_COMBINE_KEY,
-    TEST_IS_WXML,
+    TEMPLATE_EXTNAME,
 } from './../constant';
 
 import {
@@ -16,6 +16,7 @@ import {
     getFatherGenericComReg,
     getCombineFatherUnqpropStr,
     getFatherGeneticPropStr,
+    getTemplateExtnameReg
 } from './index';
 
 import {
@@ -59,14 +60,15 @@ function updateFatherJson({jsonFileName, bundle, arrGenricRes, ctx}){
 }
  
 
-export function cleanComponent(ctx, bundle){
+export function cleanComponent(ctx, bundle, platform){
     const CACHE_GENERIC_COMBINE = getCombineCache();
     const fatherGenericPropStr = getFatherGeneticPropStr();
+    const extName = TEMPLATE_EXTNAME[platform];
     Object.keys(bundle).forEach((fileName) => {
         const chunkInfo = bundle[fileName];
         // console.log('chunkInfo', chunkInfo);
         // console.log('fileName', fileName);
-        if (TEST_IS_WXML.test(fileName)) {
+        if (getTemplateExtnameReg(platform).test(fileName)) {
             // 处理组合组件
             Object.keys(CACHE_GENERIC_COMBINE).forEach((unqid) => {
                 if (chunkInfo.source.indexOf(unqid) !== -1) {
@@ -75,7 +77,10 @@ export function cleanComponent(ctx, bundle){
                     // 去掉组合组件中新增的临时节点
                     const reg = getCombineChildReg();
                     const res = chunkInfo.source.match(reg);
-                    chunkInfo.source = chunkInfo.source.replace(res[0],'');
+                    res.forEach( element => {
+                        chunkInfo.source = chunkInfo.source.replace(element, '');
+                    });
+                    
                     // 去掉组合组件里父节点的unqid，并且增加 generic:child="ceshiGeneticCom" ，切 ceshiGeneticCom 要从驼峰转成中划线
                     const fatherGenericSym = cacheObj.genericInfos
                         .map(
@@ -99,7 +104,7 @@ export function cleanComponent(ctx, bundle){
                 
                 // 去掉临时记录的generic key
                 chunkInfo.source = chunkInfo.source.replace(new RegExp(fatherGenericPropStr, 'g'),'');
-                const jsonFileName = fileName.replace('.wxml','.json');
+                const jsonFileName = fileName.replace(extName,'.json');
                 
                 // 找到father的json文件，新增generic的依赖
                 updateFatherJson({jsonFileName, bundle, arrGenricRes, ctx})
