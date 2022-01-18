@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "lib": ["es2017"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2017",
+    "importHelpers": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "allowJs": true,
+    "typeRoots": ["node_modules/@types", "src/types"],
+  },
+  "include": ["src/**/*.ts", "bin/**/*.ts", "example/**/*.ts", "*.config.js"],
+  "exclude": ["node_modules/**", "dist/**"],
+}

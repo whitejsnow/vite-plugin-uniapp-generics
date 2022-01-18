@@ -1,0 +1,33 @@
+{
+  "name": "vite-plugin-uniapp-generics",
+  "version": "0.0.2",
+  "description": "a minprogram componentGenerics plugin for uniapp3 ",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.woa.com:wsWebGroup/wesee-white-fe/plugins/vite-plugin-uniapp-generics.git"
+  },
+  "keywords": [
+    "generic",
+    "uniapp",
+    "uniapp3"
+  ],
+  "author": "maxizhang",
+  "license": "ISC",
+  "dependencies": {
+    "@dcloudio/uni-cli-shared": "^3.0.0-alpha-3030520211229004",
+    "magic-string": "^0.25.7",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "rollup": "^2.63.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript": "^1.0.1",
+    "typescript": "^4.5.4"
+  }
+}
