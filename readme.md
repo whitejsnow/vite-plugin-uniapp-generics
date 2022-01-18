@@ -88,7 +88,7 @@ export default {
 - 仅会渲染出`v-for`中的首条内容，后面的子组件不会被渲染。
 
 2. `slot`并不支持`v-for` [需求：更强大的slot](https://developers.weixin.qq.com/community/develop/doc/000ec0688e466071b858fed7f56c00)
-> slot 本身应该是属于父组件的一部分，它能使用的数据是父组件数据而不是子组件数据。如果要定制子组件的“某些部分”的话，应该不是使用 slot，而是使用抽象节点吧：https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/generics.html
+> slot 本身应该是属于父组件的一部分，它能使用的数据是父组件数据而不是子组件数据。如果要定制子组件的“某些部分”的话，应该不是使用 slot，而是使用[抽象节点](https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/generics.html)吧
 
 3. `slot`不支持父组件传递数据
 - 这个目前`uniapp`和`taro`都是静态编译的时候劫持数据，并在运行时结合`vue3`的响应式更新机制解决。
